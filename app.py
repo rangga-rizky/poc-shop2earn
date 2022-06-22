@@ -13,8 +13,6 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     options = Options()
-    # local mac uncomment this
-    # options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
