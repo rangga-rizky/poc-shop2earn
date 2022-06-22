@@ -45,11 +45,7 @@ def hello():
 
     time.sleep(3)
 
-    # find parent first
-    container = driver.find_element_by_xpath("/html/body/div[2]/section/div/div[2]/fragment-loader/div/div/div[5]/div/div")
-
-    # then grab the children, sorry sounds wrong
-    all_children_by_xpath = container.find_elements_by_xpath("./child::*")
+    all_children_by_xpath = driver.find_elements_by_xpath("/html/body/div[2]/section/div/div[2]/fragment-loader/div/div/div[5]/div/div/div")
 
     # move them to csv, only rawdata for now
     with open('output.csv', 'wb') as data_file:
