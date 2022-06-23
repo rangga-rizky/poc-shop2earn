@@ -5,6 +5,7 @@ from waitress import serve
 from selenium.webdriver import ActionChains
 import time
 from flask import request
+import csv
 
 app = Flask(__name__)
 
@@ -40,8 +41,15 @@ def hello():
 
     driver.get("https://www.bukalapak.com/payment/invoices?from=navbar")
 
-    time.sleep(2)
-    
+    time.sleep(3)
+
+    all_children_by_xpath = driver.find_elements_by_xpath("/html/body/div[2]/section/div/div[2]/fragment-loader/div/div/div[5]/div/div/div")
+
+    # move them to csv, only rawdata for now
+    with open('output.csv', 'wb') as data_file:
+        writer = csv.writer(data_file, delimiter='\n')
+        writer.writerows(map(lambda x: [x.text], all_children_by_xpath))
+
     element_text = driver.page_source
     driver.quit()    
     return element_text
